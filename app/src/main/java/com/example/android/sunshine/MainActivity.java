@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
+                    .add(R.id.container, new ForecastFragment())
                     .commit();
         }
     }
@@ -50,42 +51,4 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-
-            String[] forecastArray = {  // Data for ListView
-                    "Today - Sunny - 88/63",
-                    "Tomorrow - Foggy - 70/40",
-                    "Wednesday - Cloudy - 72/63",
-                    "Thursday - Asteroids - 75/65",
-                    "Friday - Heavy Rain - 65/56",
-                    "Saturday - Hellfire - 99/99",
-                    "Sunday - Sunny - 80/68"
-            };
-
-            List<String> weekForecast = new ArrayList<String>(Arrays.asList(forecastArray));
-
-            ArrayAdapter<String> mForecastAdapter = new ArrayAdapter<String>(
-                    // The current context
-                    getActivity(),
-                    // ID of list item layout
-                    R.layout.list_item_forecast,
-                    // ID of the textview to populate
-                    R.id.list_item_forecast_textview,
-                    // Forecast data
-                    weekForecast);
-
-            return rootView;
-        }
-    }
 }
